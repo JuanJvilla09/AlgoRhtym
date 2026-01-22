@@ -1,0 +1,147 @@
+// AlgoRhythm - Keyframe Animations (Apple-Inspired Subtle)
+
+@use 'variables' as *;
+
+// Vinyl Disc Rotation - 33⅓ RPM = 1.8s per rotation
+@keyframes spin {
+  from {
+    transform: rotate(0deg) translateY(-2px);
+  }
+  to {
+    transform: rotate(360deg) translateY(-2px);
+  }
+}
+
+// Subtle needle vibration during playback
+@keyframes needle-vibration {
+  0%, 100% {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  25% {
+    transform: translateX(-50%) rotate(0.3deg);
+  }
+  75% {
+    transform: translateX(-50%) rotate(-0.3deg);
+  }
+}
+
+// Subtle vinyl shine
+@keyframes vinyl-shine {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+// Pulse for active elements (very subtle)
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+// Soft breathing effect
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+// Fade in with subtle lift
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Fade in scale
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Progress bar subtle shimmer
+@keyframes progress-shine {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+// Audio visualizer bars
+@keyframes visualizer {
+  0%, 100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+// Gentle hover lift
+@keyframes lift {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-2px);
+  }
+}
+
+// Ring pulse (for active states - enhanced)
+@keyframes ring-pulse {
+  0% {
+    box-shadow:
+      $shadow-md,
+      0 0 0 0 rgba(0, 0, 0, 0.15);
+  }
+  50% {
+    box-shadow:
+      $shadow-lg,
+      0 0 0 8px rgba(0, 0, 0, 0);
+  }
+  100% {
+    box-shadow:
+      $shadow-md,
+      0 0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+
+// Mixins for applying animations
+@mixin spinning($duration: 1.8s) {
+  animation: spin $duration linear infinite;
+}
+
+@mixin fading-in($duration: 0.4s, $delay: 0s) {
+  animation: fadeIn $duration $ease-out $delay forwards;
+  opacity: 0;
+}
+
+@mixin scale-in($duration: 0.3s, $delay: 0s) {
+  animation: fadeInScale $duration $ease-spring $delay forwards;
+  opacity: 0;
+}

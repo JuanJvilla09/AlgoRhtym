@@ -1,0 +1,196 @@
+@use '../../assets/styles/variables' as *;
+@use '../../assets/styles/animations' as *;
+
+.playlist {
+  background: transparent;
+  border: 1px solid $border-color;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  width: 100%;
+  box-shadow: $shadow-component;
+  transition: box-shadow $transition-normal;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $space-sm $space-md;
+    border-bottom: 1px solid $border-color;
+
+    h2 {
+      font-family: $font-display;
+      font-size: 0.875rem;
+      font-weight: $weight-semibold;
+      color: $text-primary;
+      margin: 0;
+      letter-spacing: $tracking-tight;
+    }
+  }
+
+  &__count {
+    font-size: 0.6875rem;
+    font-weight: $weight-medium;
+    color: $text-secondary;
+    background: $light-gray;
+    padding: $space-xs $space-sm;
+    border-radius: $radius-full;
+  }
+
+  &__empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $space-xl $space-lg;
+    color: $text-tertiary;
+    text-align: center;
+
+    svg {
+      width: 32px;
+      height: 32px;
+      margin-bottom: $space-sm;
+    }
+
+    p {
+      font-size: 0.8125rem;
+      font-weight: $weight-medium;
+      color: $text-secondary;
+      margin-bottom: $space-xs;
+    }
+
+    span {
+      font-size: 0.6875rem;
+    }
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: $space-sm;
+    padding: $space-xs $space-md;
+    cursor: pointer;
+    transition: background $transition-fast;
+    border-bottom: 1px solid $border-color;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background: $accent-muted;
+
+      .playlist__item-remove {
+        opacity: 1;
+      }
+    }
+
+    &--active {
+      background: $accent-muted;
+
+      .playlist__item-number {
+        color: $text-primary;
+        font-weight: $weight-semibold;
+      }
+
+      .playlist__item-name {
+        color: $text-primary;
+        font-weight: $weight-medium;
+      }
+    }
+
+    &-number {
+      flex-shrink: 0;
+      width: 24px;
+      font-family: $font-mono;
+      font-size: 0.6875rem;
+      font-weight: $weight-regular;
+      color: $text-tertiary;
+      text-align: center;
+    }
+
+    &-playing {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 2px;
+      height: 12px;
+
+      span {
+        width: 2px;
+        background: $pure-black;
+        border-radius: 1px;
+        animation: visualizer 0.4s ease-in-out infinite alternate;
+
+        &:nth-child(1) {
+          height: 35%;
+          animation-delay: 0s;
+        }
+
+        &:nth-child(2) {
+          height: 75%;
+          animation-delay: 0.15s;
+        }
+
+        &:nth-child(3) {
+          height: 50%;
+          animation-delay: 0.3s;
+        }
+      }
+    }
+
+    &-name {
+      flex: 1;
+      font-size: 0.8125rem;
+      font-weight: $weight-regular;
+      color: $text-primary;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: color $transition-fast;
+    }
+
+    &-remove {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      padding: 0;
+      background: none;
+      border: none;
+      color: $text-tertiary;
+      cursor: pointer;
+      opacity: 0;
+      transition: all $transition-fast;
+      border-radius: $radius-sm;
+
+      &:hover {
+        color: $text-primary;
+        background: $border-color;
+      }
+
+      svg {
+        width: 14px;
+        height: 14px;
+      }
+    }
+  }
+}
+
+@keyframes visualizer {
+  0% {
+    transform: scaleY(0.3);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}

@@ -1,0 +1,94 @@
+@use '../../assets/styles/variables' as *;
+@use '../../assets/styles/animations' as *;
+
+.turntable {
+  position: relative;
+  width: $turntable-size;
+  aspect-ratio: 1;
+  background: $pure-white;
+  border-radius: $radius-xl;
+  border: 1px solid $border-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color $transition-normal, box-shadow $transition-slow;
+  box-shadow: $shadow-component;
+
+  @media (max-width: $breakpoint-sm) {
+    border-radius: $radius-lg;
+  }
+
+  &:hover {
+    border-color: $border-hover;
+  }
+
+  &--playing {
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.08),
+      0 8px 24px rgba(0, 0, 0, 0.06);
+  }
+
+  // Subtle texture (optional)
+  &__texture {
+    display: none;
+  }
+
+  // Platter (minimal ring under vinyl)
+  &__platter {
+    position: absolute;
+    width: calc(#{$vinyl-size} + 24px);
+    height: calc(#{$vinyl-size} + 24px);
+    border-radius: 50%;
+    background: $light-gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  // Power LED indicator
+  &__led {
+    position: absolute;
+    bottom: $space-lg;
+    left: $space-lg;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: $light-gray;
+    transition: all $transition-normal;
+
+    &--on {
+      background: $pure-black;
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      bottom: $space-md;
+      left: $space-md;
+      width: 5px;
+      height: 5px;
+    }
+  }
+
+  // Brand label
+  &__brand {
+    position: absolute;
+    bottom: $space-lg;
+    right: $space-lg;
+    font-family: $font-display;
+    font-size: 0.625rem;
+    font-weight: $weight-medium;
+    letter-spacing: $tracking-wider;
+    color: $text-tertiary;
+    text-transform: uppercase;
+
+    @media (max-width: $breakpoint-sm) {
+      font-size: 0.5625rem;
+      right: $space-md;
+      bottom: $space-md;
+    }
+  }
+
+  // Corner elements removed for minimal look
+  &__screw {
+    display: none;
+  }
+}

@@ -1,0 +1,221 @@
+// AlgoRhythm - Global Styles (Apple-Inspired Minimal)
+
+@use 'variables' as *;
+@use 'animations' as *;
+
+// Reset & Base
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: $font-body;
+  font-weight: $weight-regular;
+  background: $pure-white;
+  color: $text-primary;
+  min-height: 100vh;
+  overflow-x: hidden;
+  letter-spacing: $tracking-tight;
+  line-height: 1.5;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+// Typography
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-display;
+  font-weight: $weight-semibold;
+  color: $text-primary;
+  letter-spacing: $tracking-tight;
+}
+
+h1 {
+  font-size: 1.5rem;
+  font-weight: $weight-bold;
+  letter-spacing: -0.03em;
+
+  @media (max-width: $breakpoint-sm) {
+    font-size: 1.25rem;
+  }
+}
+
+h2 {
+  font-size: 1.25rem;
+  font-weight: $weight-semibold;
+}
+
+p {
+  line-height: 1.6;
+  color: $text-secondary;
+}
+
+// Links
+a {
+  color: $text-primary;
+  text-decoration: none;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $text-secondary;
+  }
+}
+
+// Buttons
+button {
+  font-family: $font-body;
+  font-weight: $weight-medium;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all $transition-fast;
+  letter-spacing: $tracking-tight;
+
+  &:focus-visible {
+    outline: 2px solid $pure-black;
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+}
+
+// Scrollbar Styling (Minimal)
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: $radius-full;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.25);
+  }
+}
+
+// Selection
+::selection {
+  background: rgba(0, 0, 0, 0.1);
+  color: $text-primary;
+}
+
+// Utility Classes
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// App Container
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: $space-xl $space-lg;
+  gap: $space-lg;
+
+  @media (max-width: $breakpoint-sm) {
+    padding: $space-md;
+    gap: $space-md;
+  }
+}
+
+.app-header {
+  text-align: center;
+}
+
+.app-title {
+  color: $text-primary;
+  margin-bottom: $space-xs;
+  font-weight: $weight-bold;
+  transition: transform $transition-normal;
+
+  span {
+    font-weight: $weight-light;
+  }
+
+  &:hover {
+    transform: scale(1.01);
+  }
+}
+
+.app-subtitle {
+  font-size: 0.8125rem;
+  font-weight: $weight-regular;
+  color: $text-secondary;
+  letter-spacing: $tracking-wider;
+  text-transform: uppercase;
+}
+
+// Main Content Layout
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-lg;
+  width: 100%;
+  max-width: 900px;
+
+  @media (min-width: $breakpoint-lg) {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: $space-2xl;
+  }
+}
+
+.player-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-lg;
+}
+
+.sidebar-section {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+
+  @media (min-width: $breakpoint-lg) {
+    width: 320px;
+  }
+}

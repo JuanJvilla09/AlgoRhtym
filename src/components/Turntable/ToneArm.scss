@@ -1,0 +1,176 @@
+@use '../../assets/styles/variables' as *;
+
+.tone-arm {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  width: 40%;
+  height: 45%;
+  transform-origin: top right;
+  z-index: $z-tonearm;
+  pointer-events: none;
+  filter: drop-shadow($shadow-tonearm);
+
+  // Base / pivot point
+  &__base {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: $light-gray;
+    box-shadow: $shadow-sm;
+
+    @media (max-width: $breakpoint-sm) {
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  &__base-cap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    height: 40%;
+    border-radius: 50%;
+    background: $mid-gray;
+  }
+
+  // Main arm body container
+  &__body {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+
+    @media (max-width: $breakpoint-sm) {
+      top: 11px;
+      right: 11px;
+    }
+  }
+
+  // Counterweight (back of arm)
+  &__counterweight {
+    position: absolute;
+    top: -3px;
+    right: -16px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: $mid-gray;
+
+    @media (max-width: $breakpoint-sm) {
+      width: 14px;
+      height: 14px;
+      right: -12px;
+    }
+  }
+
+  // Horizontal arm section
+  &__horizontal {
+    position: absolute;
+    top: 3px;
+    right: -6px;
+    width: 100px;
+    height: 6px;
+    background: linear-gradient(180deg, $light-gray 0%, $mid-gray 100%);
+    border-radius: $radius-full;
+    transform: rotate(-12deg);
+    transform-origin: right center;
+
+    @media (max-width: $breakpoint-sm) {
+      width: 75px;
+      height: 5px;
+    }
+  }
+
+  // Vertical tube section
+  &__vertical {
+    position: absolute;
+    top: -2px;
+    left: -96px;
+    width: 5px;
+    height: 36px;
+    background: $mid-gray;
+    border-radius: $radius-sm;
+    transform: rotate(12deg);
+
+    @media (max-width: $breakpoint-sm) {
+      left: -72px;
+      width: 4px;
+      height: 28px;
+    }
+  }
+
+  // Headshell
+  &__headshell {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 18px;
+    background: $dark-gray;
+    border-radius: 2px 2px 0 0;
+
+    @media (max-width: $breakpoint-sm) {
+      width: 11px;
+      height: 14px;
+    }
+  }
+
+  // Cartridge
+  &__cartridge {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 8px;
+    background: $pure-black;
+    border-radius: 1px;
+
+    @media (max-width: $breakpoint-sm) {
+      width: 8px;
+      height: 6px;
+    }
+  }
+
+  // Stylus (needle)
+  &__stylus {
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 5px;
+    background: $dark-gray;
+
+    &--vibrating {
+      animation: needle-vibration 0.1s ease-in-out infinite;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 3px;
+      background: $mid-gray;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      height: 4px;
+
+      &::after {
+        width: 2px;
+        height: 2px;
+      }
+    }
+  }
+}

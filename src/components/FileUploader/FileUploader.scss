@@ -1,0 +1,123 @@
+@use '../../assets/styles/variables' as *;
+@use '../../assets/styles/animations' as *;
+
+.file-uploader {
+  width: 100%;
+}
+
+.drop-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $space-lg $space-md;
+  border: 1px dashed $border-color;
+  border-radius: $radius-lg;
+  background: transparent;
+  cursor: pointer;
+  transition: all $transition-normal;
+  box-shadow: $shadow-component;
+
+  &:hover,
+  &:focus-visible {
+    border-color: $text-tertiary;
+    background: $accent-muted;
+    transform: translateY(-1px);
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.06),
+      0 6px 20px rgba(0, 0, 0, 0.04);
+
+    .drop-zone__icon {
+      color: $text-primary;
+      transform: scale(1.05);
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid $pure-black;
+    outline-offset: 2px;
+  }
+
+  &--active {
+    border-color: $pure-black;
+    border-style: solid;
+    background: $accent-muted;
+
+    .drop-zone__icon {
+      color: $text-primary;
+      animation: pulse 0.8s ease infinite;
+    }
+  }
+
+  &__icon {
+    width: 28px;
+    height: 28px;
+    color: $text-tertiary;
+    margin-bottom: $space-sm;
+    transition: all $transition-normal;
+    transform: scale(1);
+
+    svg {
+      width: 100%;
+      height: 100%;
+      stroke-width: 1.5;
+    }
+  }
+
+  &__text {
+    font-size: 0.8125rem;
+    font-weight: $weight-medium;
+    color: $text-primary;
+    margin-bottom: $space-xs;
+    text-align: center;
+  }
+
+  &__formats {
+    font-size: 0.6875rem;
+    font-weight: $weight-regular;
+    color: $text-secondary;
+    letter-spacing: $tracking-wide;
+  }
+
+  &__input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+}
+
+.file-uploader__error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-md;
+  margin-top: $space-md;
+  padding: $space-sm $space-md;
+  background: transparent;
+  border: 1px solid $border-color;
+  border-radius: $radius-sm;
+  color: $text-primary;
+  font-size: 0.8125rem;
+  animation: fadeIn 0.3s $ease-out;
+
+  &-close {
+    background: none;
+    border: none;
+    color: $text-secondary;
+    font-size: 1.125rem;
+    line-height: 1;
+    padding: $space-xs;
+    opacity: 0.6;
+    transition: opacity $transition-fast;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

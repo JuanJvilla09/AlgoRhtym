@@ -1,0 +1,288 @@
+@use '../../assets/styles/variables' as *;
+@use '../../assets/styles/animations' as *;
+@use 'sass:color';
+
+// Control Button Base
+.control-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: $radius-full;
+  background: transparent;
+  border: 1px solid $border-color;
+  color: $text-primary;
+  cursor: pointer;
+  transition: all $transition-fast;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+
+  &:hover:not(:disabled) {
+    background: $accent-muted;
+    border-color: $border-hover;
+    transform: translateY(-1px);
+    box-shadow: $shadow-sm;
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.96) translateY(0);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  &__icon {
+    width: 18px;
+    height: 18px;
+    transition: transform $transition-fast;
+
+    &--loading {
+      animation: spin 1s linear infinite;
+    }
+  }
+
+  // Play button specific
+  &--play {
+    width: 48px;
+    height: 48px;
+    background: $pure-black;
+    border-color: $pure-black;
+    color: $pure-white;
+    box-shadow: $shadow-md;
+
+    .control-btn__icon {
+      width: 20px;
+      height: 20px;
+      transition: transform $transition-normal;
+    }
+
+    &:hover:not(:disabled) {
+      background: $accent-hover;
+      border-color: $accent-hover;
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: $shadow-lg;
+
+      .control-btn__icon {
+        transform: scale(1.05);
+      }
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0) scale(0.98);
+      box-shadow: $shadow-sm;
+    }
+
+    &.control-btn--active {
+      animation: ring-pulse 2s ease-out infinite;
+    }
+  }
+
+  // Stop button specific
+  &--stop {
+    background: transparent;
+    border-color: $border-color;
+    color: $text-primary;
+
+    &:hover:not(:disabled) {
+      background: $accent-muted;
+      border-color: $border-hover;
+    }
+  }
+
+  // Skip buttons
+  &--skip {
+    width: 36px;
+    height: 36px;
+
+    .control-btn__icon {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+// Skip buttons container
+.skip-buttons {
+  display: flex;
+  gap: $space-sm;
+}
+
+// Controls wrapper
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-md;
+  padding: $space-md $space-lg;
+  background: $pure-white;
+  border: 1px solid $border-color;
+  border-radius: $radius-lg;
+  width: 100%;
+  max-width: 320px;
+  box-shadow: $shadow-component;
+  transition: box-shadow $transition-normal;
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    gap: $space-sm;
+  }
+
+  &__bottom {
+    display: flex;
+    align-items: center;
+    gap: $space-md;
+    width: 100%;
+  }
+}
+
+// Progress Bar
+.progress-bar {
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+  width: 100%;
+
+  &__time {
+    font-family: $font-mono;
+    font-size: 0.6875rem;
+    font-weight: $weight-regular;
+    color: $text-secondary;
+    min-width: 36px;
+    text-align: center;
+  }
+
+  &__track {
+    flex: 1;
+    height: 4px;
+    background: $light-gray;
+    border-radius: $radius-full;
+    cursor: pointer;
+    position: relative;
+    overflow: visible;
+    transition: height $transition-fast, background $transition-fast;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
+
+    &:hover {
+      height: 6px;
+      background: color.adjust($light-gray, $lightness: -3%);
+
+      .progress-bar__handle {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid $pure-black;
+      outline-offset: 4px;
+    }
+  }
+
+  &__fill {
+    height: 100%;
+    background: linear-gradient(90deg, $pure-black 0%, color.scale($pure-black, $lightness: 5%) 100%);
+    border-radius: $radius-full;
+    transition: width 0.1s linear;
+    position: relative;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  }
+
+  &__handle {
+    position: absolute;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    background: $pure-black;
+    border: 2px solid $pure-white;
+    border-radius: 50%;
+    transform: translateX(-50%) scale(0);
+    opacity: 0;
+    transition: all $transition-fast;
+    box-shadow: $shadow-lg;
+    pointer-events: none;
+    margin-top: -6px;
+  }
+}
+
+// Volume Slider
+.volume-slider {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  min-width: 110px;
+
+  &__icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    background: none;
+    border: none;
+    color: $text-secondary;
+    cursor: pointer;
+    transition: color $transition-fast;
+    border-radius: $radius-sm;
+
+    &:hover {
+      color: $text-primary;
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  &__track {
+    flex: 1;
+    height: 4px;
+    background: $light-gray;
+    border-radius: $radius-full;
+    cursor: pointer;
+    position: relative;
+    transition: height $transition-fast;
+
+    &:hover,
+    &--active {
+      height: 6px;
+
+      .volume-slider__handle {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid $pure-black;
+      outline-offset: 4px;
+    }
+  }
+
+  &__fill {
+    height: 100%;
+    background: $mid-gray;
+    border-radius: $radius-full;
+    transition: width 0.05s linear;
+  }
+
+  &__handle {
+    position: absolute;
+    top: 50%;
+    width: 10px;
+    height: 10px;
+    background: $dark-gray;
+    border-radius: 50%;
+    transform: translateX(-50%) scale(0);
+    opacity: 0;
+    transition: all $transition-fast;
+    box-shadow: $shadow-sm;
+    pointer-events: none;
+    margin-top: -5px;
+  }
+}
